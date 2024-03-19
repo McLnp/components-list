@@ -10,6 +10,8 @@ export const Form = () => {
     prelude: "",
     heading: "",
     contentItems: [{ heading: "", text: "", icon: "", column: "" }],
+    section: "",
+    cta: "",
   });
 
   const handleTitleChange =
@@ -59,6 +61,20 @@ export const Form = () => {
         <hr />
         <ContentField initialValue={value} changeCallback={setValue} />
         <hr />
+        <TextField
+          label="Section"
+          name="section"
+          id="section"
+          value={value.section}
+          onChange={handleTitleChange("section")}
+        />
+        <TextField
+          label="Cta"
+          name="cta"
+          id="cta"
+          value={value.cta}
+          onChange={handleTitleChange("cta")}
+        />
       </form>
     </div>
   );
