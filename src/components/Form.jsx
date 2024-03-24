@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ContentField from "./ContentField";
 import TextField from "./TextField";
 import TextareaField from "./TextareaField";
+import CtaField from "./Cta";
 
 export const Form = () => {
   const [value, setValue] = useState({
@@ -11,7 +12,11 @@ export const Form = () => {
     heading: "",
     contentItems: [{ heading: "", text: "", icon: "", column: "" }],
     section: "",
-    cta: "",
+    ctaItems: [{text: "", link: "", icon: "" }],
+    previewUrl:"",
+    backgroundImg:"",
+    
+
   });
 
   const handleTitleChange =
@@ -68,13 +73,26 @@ export const Form = () => {
           value={value.section}
           onChange={handleTitleChange("section")}
         />
+        <hr />
+        <CtaField initialValue={value} changeCallback={setValue} />
+        <hr />
         <TextField
-          label="Cta"
-          name="cta"
-          id="cta"
-          value={value.cta}
-          onChange={handleTitleChange("cta")}
+          label="Background Image"
+          name="background-img"
+          id="background-img"
+          value={value.backgroundImg}
+          onChange={handleTitleChange("backgroundImg")}
         />
+        <TextField
+          label="Preview Url"
+          name="preview-url"
+          id="preview-url"
+          value={value.previewUrl}
+          onChange={handleTitleChange("previewUrl")}
+        />
+     
+        
+
       </form>
     </div>
   );

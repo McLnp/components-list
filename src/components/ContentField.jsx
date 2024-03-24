@@ -68,7 +68,7 @@ function ContentField({ initialValue = { contentItems: [] }, changeCallback }) {
         </fieldset>
       ))}
 
-      <Button onClick={addContentField} />
+      <Button btnText={"Add Content"} onClick={addContentField} />
     </div>
   );
 }
