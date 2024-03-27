@@ -3,6 +3,7 @@ import ContentField from "./ContentField";
 import TextField from "./TextField";
 import TextareaField from "./TextareaField";
 import CtaField from "./Cta";
+import Tags from "./Tags";
 
 export const Form = () => {
   const [value, setValue] = useState({
@@ -12,11 +13,12 @@ export const Form = () => {
     heading: "",
     contentItems: [{ heading: "", text: "", icon: "", column: "" }],
     section: "",
-    ctaItems: [{text: "", link: "", icon: "" }],
-    previewUrl:"",
-    backgroundImg:"",
-    
-
+    ctaItems: [{ text: "", link: "", icon: "" }],
+    previewUrl: "",
+    backgroundImg: "",
+    tagItems: [""],
+    textPosition: "",
+    imagePosition: "",
   });
 
   const handleTitleChange =
@@ -30,7 +32,7 @@ export const Form = () => {
 
   return (
     <div className="form-wrapper w-full min-h-lvh flex items-center justify-center py-24">
-      {/* {JSON.stringify(value)} */}
+      {JSON.stringify(value)}
       <form
         action=""
         className="flex flex-col max-w-3xl p-8 gap-5 w-full border border-accent rounded-xl shadow-md"
@@ -76,13 +78,7 @@ export const Form = () => {
         <hr />
         <CtaField initialValue={value} changeCallback={setValue} />
         <hr />
-        <TextField
-          label="Background Image"
-          name="background-img"
-          id="background-img"
-          value={value.backgroundImg}
-          onChange={handleTitleChange("backgroundImg")}
-        />
+
         <TextField
           label="Preview Url"
           name="preview-url"
@@ -90,9 +86,30 @@ export const Form = () => {
           value={value.previewUrl}
           onChange={handleTitleChange("previewUrl")}
         />
-     
-        
-
+        <TextField
+          label="Background Image"
+          name="background-img"
+          id="background-img"
+          value={value.backgroundImg}
+          onChange={handleTitleChange("backgroundImg")}
+        />
+        <hr />
+        <Tags initialValue={value} changeCallback={setValue} />
+        <hr />
+        <TextField
+          label="Text Position"
+          name="text-position"
+          id="text-position"
+          value={value.textPosition}
+          onChange={handleTitleChange("textPosition")}
+        />
+        <TextField
+          label="Image Position"
+          name="image-position"
+          id="image-position"
+          value={value.imagePosition}
+          onChange={handleTitleChange("imagePosition")}
+        />
       </form>
     </div>
   );

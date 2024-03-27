@@ -22,7 +22,6 @@ function CtaField({ initialValue = { ctaItems: [] }, changeCallback }) {
 
   return (
     <div className="cta-array-wrapper flex flex-col gap-3 py-4">
-        
       {ctas.map((cta, ctaIndex) => (
         <fieldset
           key={`fieldset-${ctaIndex + 1}`}
@@ -35,33 +34,26 @@ function CtaField({ initialValue = { ctaItems: [] }, changeCallback }) {
             name={`cta-text-${ctaIndex + 1}`}
             id={`cta-text-${ctaIndex + 1}`}
             value={cta.text}
-            onChange={(e) =>
-              handleCtaChange("text", ctaIndex, e.target.value)
-            }
+            onChange={(e) => handleCtaChange("text", ctaIndex, e.target.value)}
           />
           <TextField
             label={`Cta Link ${ctaIndex + 1}`}
             name={`cta-link-${ctaIndex + 1}`}
             id={`cta-link-${ctaIndex + 1}`}
             value={cta.link}
-            onChange={(e) =>
-              handleCtaChange("link", ctaIndex, e.target.value)
-            }
+            onChange={(e) => handleCtaChange("link", ctaIndex, e.target.value)}
           />
           <TextField
             label={`Cta Icon ${ctaIndex + 1}`}
             name={`cta-icon-${ctaIndex + 1}`}
             id={`cta-icon-${ctaIndex + 1}`}
             value={cta.icon}
-            onChange={(e) =>
-              handleCtaChange("icon", ctaIndex, e.target.value)
-            }
+            onChange={(e) => handleCtaChange("icon", ctaIndex, e.target.value)}
           />
-          
         </fieldset>
       ))}
 
-      <Button btnText={'Add'} onClick={addCtaField} />
+      <Button btnText={"Add Cta"} onClick={addCtaField} />
     </div>
   );
 }
