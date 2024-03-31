@@ -4,6 +4,10 @@ import TextField from "./TextField";
 import TextareaField from "./TextareaField";
 import CtaField from "./Cta";
 import Tags from "./Tags";
+import Images from "./Images";
+import CarouselImg from "./CarouselImg";
+import GridImg from "./gridImg";
+import FormField from "./FormField";
 
 export const Form = () => {
   const [value, setValue] = useState({
@@ -14,8 +18,24 @@ export const Form = () => {
     contentItems: [{ heading: "", text: "", icon: "", column: "" }],
     section: "",
     ctaItems: [{ text: "", link: "", icon: "" }],
+    form: [
+      {
+        fields: [
+          {
+            type: "",
+            label: "",
+            icon: "",
+            placeholder: "",
+          },
+        ],
+        buttons: { type: "", label: "" },
+      },
+    ],
     previewUrl: "",
     backgroundImg: "",
+    images: [{ alt: "", src: "", position: "" }],
+    carouselImages: [""],
+    gridImages: [""],
     tagItems: [""],
     textPosition: "",
     imagePosition: "",
@@ -32,7 +52,6 @@ export const Form = () => {
 
   return (
     <div className="form-wrapper w-full min-h-lvh flex items-center justify-center py-24">
-      {JSON.stringify(value)}
       <form
         action=""
         className="flex flex-col max-w-3xl p-8 gap-5 w-full border border-accent rounded-xl shadow-md"
@@ -94,6 +113,12 @@ export const Form = () => {
           onChange={handleTitleChange("backgroundImg")}
         />
         <hr />
+        <Images initialValue={value} changeCallback={setValue} />
+        <hr />
+        <CarouselImg initialValue={value} changeCallback={setValue} />
+        <hr />
+        <GridImg initialValue={value} changeCallback={setValue} />
+        <hr />
         <Tags initialValue={value} changeCallback={setValue} />
         <hr />
         <TextField
@@ -110,6 +135,9 @@ export const Form = () => {
           value={value.imagePosition}
           onChange={handleTitleChange("imagePosition")}
         />
+        <hr />
+        <FormField initialValue={value} changeCallback={setValue} />
+        {/* {JSON.stringify(value)} */}
       </form>
     </div>
   );
