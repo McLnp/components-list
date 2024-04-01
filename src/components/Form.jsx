@@ -8,6 +8,8 @@ import Images from "./Images";
 import CarouselImg from "./CarouselImg";
 import GridImg from "./gridImg";
 import FormField from "./FormField";
+// backend connect
+import supabase from "../config/SupabaseClient";
 
 export const Form = () => {
   const [value, setValue] = useState({
@@ -18,19 +20,17 @@ export const Form = () => {
     contentItems: [{ heading: "", text: "", icon: "", column: "" }],
     section: "",
     ctaItems: [{ text: "", link: "", icon: "" }],
-    form: [
-      {
-        fields: [
-          {
-            type: "",
-            label: "",
-            icon: "",
-            placeholder: "",
-          },
-        ],
-        buttons: { type: "", label: "" },
-      },
-    ],
+    form: {
+      fields: [
+        {
+          type: "",
+          label: "",
+          icon: "",
+          placeholder: "",
+        },
+      ],
+    },
+
     previewUrl: "",
     backgroundImg: "",
     images: [{ alt: "", src: "", position: "" }],
@@ -40,6 +40,8 @@ export const Form = () => {
     textPosition: "",
     imagePosition: "",
   });
+
+  console.log(supabase);
 
   const handleTitleChange =
     (valueProp = "") =>
@@ -137,7 +139,8 @@ export const Form = () => {
         />
         <hr />
         <FormField initialValue={value} changeCallback={setValue} />
-        {/* {JSON.stringify(value)} */}
+
+        {/* {JSON.stringify(value.form)} */}
       </form>
     </div>
   );
