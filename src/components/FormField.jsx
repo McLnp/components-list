@@ -100,11 +100,8 @@ function FormField({
             />
           </div>
         ))}
-
         <Button btnText="Add Form Field" onClick={addFormField} />
       </fieldset>
-
-      {JSON.stringify(formFields)}
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ContentField from "./ContentField";
 import TextField from "./TextField";
 import TextareaField from "./TextareaField";
@@ -10,6 +11,7 @@ import GridImg from "./gridImg";
 import FormField from "./FormField";
 // backend connect
 import supabase from "../config/SupabaseClient";
+import Button from "./Button";
 
 export const Form = () => {
   const [value, setValue] = useState({
@@ -30,7 +32,6 @@ export const Form = () => {
         },
       ],
     },
-
     previewUrl: "",
     backgroundImg: "",
     images: [{ alt: "", src: "", position: "" }],
@@ -41,7 +42,7 @@ export const Form = () => {
     imagePosition: "",
   });
 
-  console.log(supabase);
+  const navigate = useNavigate();
 
   const handleTitleChange =
     (valueProp = "") =>
@@ -52,11 +53,30 @@ export const Form = () => {
       });
     };
 
+  const addComponent = async (e) => {
+    e.preventDefault();
+
+    const { data, error } = await supabase
+      .from("components")
+      .insert({ title: value.title, description: value.description })
+      .select();
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      console.log(data);
+      navigate("/");
+    }
+  };
+
   return (
     <div className="form-wrapper w-full min-h-lvh flex items-center justify-center py-24">
       <form
         action=""
         className="flex flex-col max-w-3xl p-8 gap-5 w-full border border-accent rounded-xl shadow-md"
+        onSubmit={addComponent}
       >
         <TextField
           label="Title"
@@ -140,7 +160,7 @@ export const Form = () => {
         <hr />
         <FormField initialValue={value} changeCallback={setValue} />
 
-        {/* {JSON.stringify(value.form)} */}
+        <Button type="" btnText={"Add Component"} />
       </form>
     </div>
   );
