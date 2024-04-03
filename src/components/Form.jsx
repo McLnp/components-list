@@ -42,6 +42,8 @@ export const Form = () => {
     imagePosition: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleTitleChange =
@@ -56,17 +58,167 @@ export const Form = () => {
   const addComponent = async (e) => {
     e.preventDefault();
 
+    setIsLoading((prevState) => !prevState);
+
     const { data, error } = await supabase
       .from("components")
-      .insert({ title: value.title, description: value.description })
+      .insert({
+        title: value.title,
+        description: value.description,
+        prelude: value.prelude,
+        heading: value.heading,
+        section: value.section,
+        preview_url: value.previewUrl,
+        background_img: value.backgroundImg,
+        text_position: value.textPosition,
+        image_position: value.imagePosition,
+      })
       .select();
 
-    if (error) {
-      console.log(error);
+    const component_id = data[0].id;
+    const componentContentArr = value.contentItems.map((item) => {
+      return {
+        components_id: component_id,
+        content_heading: item.heading,
+        content_text: item.text,
+        content_icon: item.icon,
+        content_column: item.column,
+      };
+    });
+
+    const componentCtaArr = value.ctaItems.map((item) => {
+      return {
+        components_id: component_id,
+        cta_text: item.text,
+        cta_link: item.link,
+        cta_icon: item.icon,
+      };
+    });
+
+    const componentFormFieldArr = value.form.fields.map((item) => {
+      return {
+        components_id: component_id,
+        component_field_type: item.type,
+        component_field_label: item.label,
+        component_field_icon: item.icon,
+        component_field_placeholder: item.placeholder,
+      };
+    });
+
+    const componentTagArr = value.tagItems.map((item) => {
+      return {
+        components_id: component_id,
+        component_tags: item,
+      };
+    });
+
+    const componentImageArr = value.images.map((item) => {
+      return {
+        components_id: component_id,
+        component_images_alt: item.alt,
+        component_images_src: item.src,
+        component_images_position: item.position,
+      };
+    });
+
+    const componentCarouselImageArr = value.carouselImages.map((item) => {
+      return {
+        components_id: component_id,
+        component_carousel_img: item,
+      };
+    });
+
+    const componentGridImageArr = value.gridImages.map((item) => {
+      return {
+        components_id: component_id,
+        component_grid_images: item,
+      };
+    });
+
+    const { data: componentContentItems, error: componentContentError } =
+      await supabase
+        .from("components_contentItems")
+        .insert(componentContentArr)
+        .select();
+
+    const { data: componentCtaItems, error: componentCtaError } = await supabase
+      .from("components_ctaItems")
+      .insert(componentCtaArr)
+      .select();
+
+    const { data: componentFormFieldItems, error: componentFormFieldError } =
+      await supabase
+        .from("components_formFields")
+        .insert(componentFormFieldArr)
+        .select();
+
+    const { data: componentTagItems, error: componentTagError } = await supabase
+      .from("components_tagItems")
+      .insert(componentTagArr)
+      .select();
+
+    const { data: componentImageItems, error: componentImagesError } =
+      await supabase
+        .from("components_images")
+        .insert(componentImageArr)
+        .select();
+
+    const {
+      data: componentCarouselImageItems,
+      error: componentCarouselImageError,
+    } = await supabase
+      .from("components_carouselImages")
+      .insert(componentCarouselImageArr)
+      .select();
+
+    const { data: componentGridImageItems, error: componentGridImageError } =
+      await supabase
+        .from("components_gridImages")
+        .insert(componentGridImageArr)
+        .select();
+
+    if (
+      error &&
+      componentContentError &&
+      componentCtaError &&
+      componentTagError &&
+      componentFormFieldError &&
+      componentImagesError &&
+      componentCarouselImageError &&
+      componentGridImageError
+    ) {
+      console.log({
+        error,
+        componentContentError,
+        componentCtaError,
+        componentTagError,
+        componentFormFieldError,
+        componentImagesError,
+        componentCarouselImageError,
+        componentGridImageError,
+      });
     }
 
-    if (data) {
-      console.log(data);
+    if (
+      data &&
+      componentContentItems &&
+      componentCtaItems &&
+      componentTagItems &&
+      componentFormFieldItems &&
+      componentImageItems &&
+      componentCarouselImageItems &&
+      componentGridImageItems
+    ) {
+      console.log({
+        data,
+        componentContentItems,
+        componentCtaItems,
+        componentTagItems,
+        componentFormFieldItems,
+        componentImageItems,
+        componentCarouselImageItems,
+        componentGridImageItems,
+      });
       navigate("/");
     }
   };
@@ -161,6 +313,9 @@ export const Form = () => {
         <FormField initialValue={value} changeCallback={setValue} />
 
         <Button type="" btnText={"Add Component"} />
+        <h2 className={isLoading ? "block" : "hidden"}>
+          Adding Component Please Wait...
+        </h2>
       </form>
     </div>
   );

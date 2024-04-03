@@ -88,6 +88,7 @@ function FormField({
               onChange={(e) =>
                 handleFieldsChange(index, "icon", e.target.value)
               }
+              addStyle={field.type === "Submit" ? "hidden" : ""}
             />
             <TextField
               label="Placeholder"
@@ -97,6 +98,7 @@ function FormField({
               onChange={(e) =>
                 handleFieldsChange(index, "placeholder", e.target.value)
               }
+              addStyle={field.type === "Submit" ? "hidden" : ""}
             />
           </div>
         ))}
