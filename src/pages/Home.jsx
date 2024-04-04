@@ -41,12 +41,7 @@ function Home() {
       <h1 className="text-5xl">Components List</h1>
       <ul className="grid grid-cols-3 gap-5">
         {components.map((component) => (
-          <CardList
-            key={component.id}
-            component_title={component.title}
-            component_desc={component.description}
-            component_tags={component.components_tagItems}
-          />
+          <CardList key={component.id} component={component} />
         ))}
       </ul>
 
