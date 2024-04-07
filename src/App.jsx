@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import View from "./pages/View";
+import Update from "./pages/Update";
 
 export function App() {
   const linkStyle = "p-3 text-base font-bold text-white";
@@ -23,6 +24,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
         <Route path="/component/:id" element={<View />} />
+        <Route path="/component-update/:id" element={<Update />} />
       </Routes>
     </BrowserRouter>
   );

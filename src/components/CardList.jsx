@@ -5,8 +5,12 @@ import { useNavigate } from "react-router-dom";
 function CardList({ component = {} }) {
   const navigate = useNavigate();
 
-  const handleClick = (component_id) => {
+  const handleView = (component_id) => {
     navigate(`/component/${component_id}`);
+  };
+
+  const handleUpdate = (component_id) => {
+    navigate(`/component-update/${component_id}`);
   };
 
   return (
@@ -23,8 +27,9 @@ function CardList({ component = {} }) {
       </div>
       <Button
         btnText={"View Component"}
-        onClick={() => handleClick(component.id)}
+        onClick={() => handleView(component.id)}
       />
+      <Button btnText={"Update"} onClick={() => handleUpdate(component.id)} />
     </li>
   );
 }
