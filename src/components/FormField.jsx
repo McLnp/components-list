@@ -3,11 +3,10 @@ import Button from "./Button";
 import TextField from "./TextField";
 import SelectField from "./SelectField";
 
-function FormField({
-  initialValue = { form: { fields: [] } },
-  changeCallback,
-}) {
-  const [formFields, setFormFields] = useState(initialValue.form.fields);
+function FormField({ initialValue = { form: [] }, changeCallback }) {
+  if (!initialValue.form) return <></>;
+  console.log(initialValue);
+  const [formFields, setFormFields] = useState(initialValue.form);
   const options = [
     { optionVal: "Text" },
     { optionVal: "Color" },
@@ -48,10 +47,7 @@ function FormField({
     });
 
     setFormFields(updatedFields);
-    changeCallback({
-      ...initialValue,
-      form: { ...initialValue.form, fields: updatedFields },
-    });
+    changeCallback({ ...initialValue, form: updatedFields });
   }
 
   return (

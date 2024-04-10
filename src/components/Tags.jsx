@@ -3,6 +3,8 @@ import TextField from "./TextField";
 import Button from "./Button";
 
 function Tags({ initialValue = { tagItems: [] }, changeCallback }) {
+  if (!initialValue.tagItems) return <></>;
+
   const [tags, setTags] = useState(initialValue.tagItems);
 
   function addTags() {

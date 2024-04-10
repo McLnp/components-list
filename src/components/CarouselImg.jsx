@@ -6,6 +6,7 @@ function CarouselImg({
   initialValue = { carouselImages: [] },
   changeCallback,
 }) {
+  if (!initialValue.carouselImages) return <></>;
   const [carouselImgs, setCarouselImgs] = useState(initialValue.carouselImages);
 
   function addCarouselImg() {

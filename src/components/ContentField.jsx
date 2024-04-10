@@ -3,6 +3,7 @@ import TextField from "./TextField";
 import Button from "./Button";
 
 function ContentField({ initialValue = { contentItems: [] }, changeCallback }) {
+  if (!initialValue.contentItems) return <></>;
   const [contents, setContents] = useState(initialValue.contentItems);
 
   const addContentField = () => {

@@ -3,6 +3,8 @@ import TextField from "./TextField";
 import Button from "./Button";
 
 function GridImg({ initialValue = { gridImages: [] }, changeCallback }) {
+  if (!initialValue.gridImages) return <></>;
+
   const [gridImgs, setGridImgs] = useState(initialValue.gridImages);
 
   function addCarouselImg() {

@@ -22,16 +22,14 @@ export const Form = () => {
     contentItems: [{ heading: "", text: "", icon: "", column: "" }],
     section: "",
     ctaItems: [{ text: "", link: "", icon: "" }],
-    form: {
-      fields: [
-        {
-          type: "",
-          label: "",
-          icon: "",
-          placeholder: "",
-        },
-      ],
-    },
+    form: [
+      {
+        type: "",
+        label: "",
+        icon: "",
+        placeholder: "",
+      },
+    ],
     previewUrl: "",
     backgroundImg: "",
     images: [{ alt: "", src: "", position: "" }],
@@ -95,7 +93,7 @@ export const Form = () => {
       };
     });
 
-    const componentFormFieldArr = value.form.fields.map((item) => {
+    const componentFormFieldArr = value.form.map((item) => {
       return {
         components_id: component_id,
         component_field_type: item.type,

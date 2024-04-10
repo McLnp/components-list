@@ -3,6 +3,8 @@ import TextField from "./TextField";
 import Button from "./Button";
 
 function CtaField({ initialValue = { ctaItems: [] }, changeCallback }) {
+  if (!initialValue.ctaItems) return <></>;
+
   const [ctas, setCtas] = useState(initialValue.ctaItems);
 
   const addCtaField = () => {

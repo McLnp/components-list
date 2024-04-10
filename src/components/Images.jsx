@@ -3,6 +3,8 @@ import Button from "./Button";
 import TextField from "./TextField";
 
 function Images({ initialValue = { images: [] }, changeCallback }) {
+  if (!initialValue.images) return <></>;
+
   const [imagesItems, setImagesItem] = useState(initialValue.images);
 
   function addImages() {
